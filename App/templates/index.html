@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Predictor Netflix — Movie vs TV Show</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+  <!-- Leaflet (map) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Particles.js (stable cdn) -->
+  <script src="https://cdn.jsdelivr.net/gh/VincentGarreau/particles.js/particles.min.js"></script>
+</head>
+<body class="dark" aria-live="polite">
+
+  <!-- Particles background -->
+  <div id="particles-js" aria-hidden="true"></div>
+
+  <main class="wrap" role="main">
+    <header class="topbar">
+      <div class="title">
+        <h1>PREDICTOR NETFLIX</h1>
+        <p class="subtitle">Clasifica Movie vs TV Show</p>
+      </div>
+      <div class="controls">
+        <button id="modeToggle" class="btn small" aria-pressed="false" title="Cambiar modo">🌙</button>
+      </div>
+    </header>
+
+    <section class="panel">
+      <form id="predictForm" method="post" class="form" autocomplete="off">
+        <!-- TITLE -->
+        <label for="title">Título</label>
+        <input id="title" name="title" type="text" placeholder="Nombre del título" />
+
+        <!-- COUNTRY with Map -->
+        <label for="countryInput">País</label>
+        <div class="row">
+          <input id="countryInput" name="country" type="text" placeholder="Seleccionar país (Mapa)" readonly />
+          <button type="button" id="openMap" class="btn outline">🌍</button>
+        </div>
+
+        <!-- Modal Map -->
+        <div id="mapModal" class="modal" aria-hidden="true" role="dialog" aria-label="Selector de país">
+          <div class="modal-inner" role="document">
+            <button class="modal-close" id="closeMap" aria-label="Cerrar mapa">✕</button>
+            <h3>Selecciona un país</h3>
+            <div id="map" class="map"></div>
+            <p class="hint">Haz clic en el mapa para seleccionar el país. También puedes buscarlo usando la caja de búsqueda del navegador.</p>
+          </div>
+        </div>
+
+        <!-- YEAR -->
+        <label for="yearSelect">Año de lanzamiento</label>
+        <select id="yearSelect" name="release_year" required></select>
+
+        <!-- DURATION -->
+        <label>Duración</label>
+        <div class="row">
+          <input id="durationNumber" type="number" min="0" placeholder="Cantidad (ej. 90)" />
+          <select id="durationType" aria-label="Tipo de duración">
+            <option value="min">min</option>
+            <option value="Season">Season(s)</option>
+          </select>
+        </div>
+        <input type="hidden" id="durationHidden" name="duration" />
+
+        <!-- RATING -->
+        <label for="ratingSelect">Rating</label>
+        <select id="ratingSelect" name="rating" required>
+          <!-- options dinámicas -->
+        </select>
+
+        <!-- GENRES -->
+        <label>Géneros (presiona Enter para añadir)</label>
+        <div id="genresBox">
+          <input id="genreInput" type="text" placeholder="Agregar género y presiona Enter" />
+          <div id="genresList" class="tags" aria-live="polite"></div>
+          <input type="hidden" id="genresHidden" name="listed_in" />
+        </div>
+
+        <button type="submit" class="btn primary submit-btn">Predecir</button>
+      </form>
+    </section>
+
+    <!-- RESULT (renderizado por flask cuando haya prediction) -->
+    {% if prediction %}
+    <section class="panel result">
+      <h2>Resultado: <strong>{{ prediction }}</strong></h2>
+      <p>Confianza: {{ (proba*100)|round(2) }}%</p>
+
+      <details>
+        <summary>Ver datos enviados</summary>
+        <ul>
+          {% for k,v in form.items() %}
+          <li><strong>{{ k }}:</strong> {{ v }}</li>
+          {% endfor %}
+        </ul>
+      </details>
+    </section>
+    {% endif %}
+
+  </main>
+
+  <footer class="site-footer">
+    <div>Desarrollado por Frank Henkourth — KDD Netflix (2025)</div>
+    <div class="small">Si /metadata está habilitado en el servidor, la interfaz autocompleta ratings y géneros.</div>
+  </footer>
+
+  <!-- App script -->
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
