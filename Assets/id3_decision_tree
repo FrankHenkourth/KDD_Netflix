@@ -1,0 +1,37 @@
+digraph Tree {
+node [shape=box, style="filled, rounded", color="black", fontname="helvetica"] ;
+edge [fontname="helvetica"] ;
+0 [label=<duration_clean &le; 12.5<br/>entropy = 0.86<br/>samples = 5572<br/>value = [3993, 1579]<br/>class = Movie>, fillcolor="#efb387"] ;
+1 [label=<duration &le; 7.5<br/>entropy = 0.025<br/>samples = 1581<br/>value = [4, 1577]<br/>class = TV Show>, fillcolor="#3a9de5"] ;
+0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
+2 [label=<listed_in_Children & Family Movies, Sci-Fi & Fantasy &le; 0.5<br/>entropy = 0.008<br/>samples = 1555<br/>value = [1, 1554]<br/>class = TV Show>, fillcolor="#399de5"] ;
+1 -> 2 ;
+3 [label=<entropy = 0.0<br/>samples = 1554<br/>value = [0, 1554]<br/>class = TV Show>, fillcolor="#399de5"] ;
+2 -> 3 ;
+4 [label=<entropy = 0.0<br/>samples = 1<br/>value = [1, 0]<br/>class = Movie>, fillcolor="#e58139"] ;
+2 -> 4 ;
+5 [label=<listed_in_Documentaries, Sports Movies &le; 0.5<br/>entropy = 0.516<br/>samples = 26<br/>value = [3, 23]<br/>class = TV Show>, fillcolor="#53aae8"] ;
+1 -> 5 ;
+6 [label=<listed_in_Documentaries &le; 0.5<br/>entropy = 0.402<br/>samples = 25<br/>value = [2, 23]<br/>class = TV Show>, fillcolor="#4aa6e7"] ;
+5 -> 6 ;
+7 [label=<entropy = 0.25<br/>samples = 24<br/>value = [1, 23]<br/>class = TV Show>, fillcolor="#42a1e6"] ;
+6 -> 7 ;
+8 [label=<entropy = 0.0<br/>samples = 1<br/>value = [1, 0]<br/>class = Movie>, fillcolor="#e58139"] ;
+6 -> 8 ;
+9 [label=<entropy = 0.0<br/>samples = 1<br/>value = [1, 0]<br/>class = Movie>, fillcolor="#e58139"] ;
+5 -> 9 ;
+10 [label=<duration &le; 17.5<br/>entropy = 0.006<br/>samples = 3991<br/>value = [3989, 2]<br/>class = Movie>, fillcolor="#e58139"] ;
+0 -> 10 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
+11 [label=<listed_in_Romantic TV Shows, TV Dramas &le; 0.5<br/>entropy = 0.684<br/>samples = 11<br/>value = [9, 2]<br/>class = Movie>, fillcolor="#eb9d65"] ;
+10 -> 11 ;
+12 [label=<country_United States, Canada &le; 0.5<br/>entropy = 0.469<br/>samples = 10<br/>value = [9, 1]<br/>class = Movie>, fillcolor="#e88f4f"] ;
+11 -> 12 ;
+13 [label=<entropy = 0.0<br/>samples = 9<br/>value = [9, 0]<br/>class = Movie>, fillcolor="#e58139"] ;
+12 -> 13 ;
+14 [label=<entropy = 0.0<br/>samples = 1<br/>value = [0, 1]<br/>class = TV Show>, fillcolor="#399de5"] ;
+12 -> 14 ;
+15 [label=<entropy = 0.0<br/>samples = 1<br/>value = [0, 1]<br/>class = TV Show>, fillcolor="#399de5"] ;
+11 -> 15 ;
+16 [label=<entropy = 0.0<br/>samples = 3980<br/>value = [3980, 0]<br/>class = Movie>, fillcolor="#e58139"] ;
+10 -> 16 ;
+}
