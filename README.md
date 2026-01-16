@@ -1,6 +1,6 @@
 # Proyecto KDD - Análisis de Títulos de Netflix
 
-![Netflix Titles Analysis](https://i.imgur.com/5J0Jj3r.png)
+![Netflix Titles Analysis](ico.png)
 
 ## Descripción
 
